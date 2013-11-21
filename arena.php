@@ -1,4 +1,5 @@
 <?php
+	include 'util.php';
 	include 'config.php';
 
 	session_start();
@@ -42,34 +43,7 @@
 				$RoundEnd = strtotime($row['RoundEnd']);
 				
 				// Get actual stage information.
-				if(time() < $CodingStart)
-				{
-					// Round has not started yet.
-					$StageName = 'Coming Soon';
-					$StageMessage = 'Round starts in';
-					$StageRemaining = $CodingStart - time();
-				}
-				elseif(time() < $BurningStart)
-				{
-					// Round is at coding stage.
-					$StageName = 'Coding Stage';
-					$StageMessage = 'Coding ends in';
-					$StageRemaining = $BurningStart - time();
-				}
-				elseif(time() < $RoundEnd)
-				{
-					// Round is at burning stage.
-					$StageName = 'Burning Stage';
-					$StageMessage = 'Round ends in';
-					$StageRemaining = $RoundEnd - time();
-				}
-				else
-				{
-					// Round has ended.
-					$StageName = 'Closure Stage';
-					$StageMessage = 'Round has ended';
-					$StageRemaining = 0;
-				}
+				list($StageName, $StageMessage, $StageRemaining) = StageInfo($CodingStart, $BurningStart, $RoundEnd);
 			}
 		}
 	}
@@ -89,5 +63,9 @@
 		<div id = "stageremaining"><?php echo $StageRemaining; ?></div>
 		<div id = "username"><?php echo $UserName; ?></div>
 		<div id = "rivalname"><?php echo $RivalName; ?></div>
+		<?php
+			include 'forms.php';
+			FileSubmit('code');
+		?>
 	</body>
 </html>
