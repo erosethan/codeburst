@@ -43,7 +43,7 @@
 				$StageMessage = CLOS_MSG;
 				$StageRemaining = 0;
 			}
-			return array($StageName, $StageMessage, $StageRemaining);
+			return array('StageName' => $StageName, 'StageMessage' => $StageMessage, 'StageRemaining' => $StageRemaining);
 		}
 	}
 ?>
