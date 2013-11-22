@@ -1,13 +1,15 @@
-<?php
+﻿<?php
 	if(!defined('UTIL_INCLUDE'))
 	{
 		define('UTIL_INCLUDE', true);
 
+		// Stages name constants.
 		define('WAIT_STAGE', 'Espera');
 		define('CODE_STAGE', 'Coding');
 		define('BURN_STAGE', 'Burning');
 		define('CLOS_STAGE', 'Closure');
 		
+		// Stages message constants.
 		define('WAIT_MSG', 'Ronda comienza en');
 		define('CODE_MSG', 'Coding termina en');
 		define('BURN_MSG', 'Ronda termina en');

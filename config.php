@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	if(!defined('CONFIG_INCLUDE'))
 	{
 		define('CONFIG_INCLUDE', true);

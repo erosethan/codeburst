@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	include 'util.php';
 	include 'config.php';
 
@@ -19,7 +19,7 @@
 			mysql_connect(DB_HOST, DB_USER, DB_PASS);
 			mysql_select_db(DB_NAME);
 			
-			$query = sprintf('select RoundName, CodingStart, BurningStart, RoundEnd, RedUserId, Red.UserName as RedName, Blue.UserName as BlueName from `Match` natural join `Round` join User as Red join User as Blue on Red.UserId = RedUserId and Blue.UserId = BlueUserId where RoundId = %d and (RedUserId = %d or BlueUserId = %d)', $RoundId, $UserId, $UserId);
+			$query = "select RoundName, RoundBase, CodingStart, BurningStart, RoundEnd, RedUserId, Red.UserName as RedName, Blue.UserName as BlueName from `Match` natural join `Round` join User as Red join User as Blue on Red.UserId = RedUserId and Blue.UserId = BlueUserId where RoundId = $RoundId and (RedUserId = $UserId or BlueUserId = $UserId)";
 			$result = mysql_query($query);
 			
 			if(mysql_num_rows($result) == 0)
@@ -37,7 +37,8 @@
 					list($UserName, $RivalName) = array($RivalName, $UserName);
 				
 				// Get round information.
-				$RoundName = $row['RoundName'];	
+				$RoundName = $row['RoundName'];
+				$RoundBase = $row['RoundBase'];
 				$CodingStart = strtotime($row['CodingStart']);
 				$BurningStart = strtotime($row['BurningStart']);
 				$RoundEnd = strtotime($row['RoundEnd']);
@@ -65,7 +66,24 @@
 		<div id = "rivalname"><?php echo $RivalName; ?></div>
 		<?php
 			include 'forms.php';
-			FileSubmit('code');
+			if($StageName == CODE_STAGE)
+			{
+				FileSubmit('code');
+				
+				$query = "select * from Code where RoundId = $RoundId and UserId = $UserId";
+				$result = mysql_query($query);
+				if(mysql_num_rows($result) > 0)
+				{
+					$row = mysql_fetch_array($result);
+					mysql_free_result($result);
+					
+					echo '<p>Último enviado: ' . $row['Submission'];
+				}
+			}
+			if($StageName == BURN_STAGE)
+			{
+				FileSubmit('burn');
+			}
 		?>
 	</body>
 </html>
