@@ -1,7 +1,6 @@
 ﻿<?php
-
-	include_once 'config.php';
 	include_once 'util.php';
+	include_once 'config.php';
 
 	session_start();
 	// Redirect if not logged in

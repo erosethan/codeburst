@@ -1,5 +1,5 @@
 ﻿<?php
-	include 'config.php';
+	include_once 'config.php';
 
 	session_start();
 	$_SESSION['UserId'] = 2;
