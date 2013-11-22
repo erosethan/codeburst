@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	if(!defined('FORMS_INCLUDE'))
 	{
 		define('FORMS_INCLUDE', true);
