@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	// Stages name constants.
 	define('WAIT_STAGE', 'Espera');
 	define('CODE_STAGE', 'Coding');
