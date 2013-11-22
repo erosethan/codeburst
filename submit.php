@@ -68,12 +68,12 @@
 			if (mysql_num_rows($result) == 0) {
 				mysql_query(
 						"insert into `Code`(UserId, RoundId, Submission, CodeLang) " .
-						"values ($userId, $roundId, '" . date(DATE_ATOM) . "', '$lang');"
+						"values ($userId, $roundId, now(), '$lang');"
 						);
 				// TODO Inserted code
 			} else {
 				mysql_query(
-						"update `Code` set Submission = '" . date(DATE_ATOM) . "', CodeLang = '$lang' " .
+						"update `Code` set Submission = now(), CodeLang = '$lang' " .
 						"where UserId = $userId and RoundId = $roundId;"
 						);
 				// TODO New code
@@ -112,12 +112,12 @@
 			if (mysql_num_rows($result) == 0) {
 				mysql_query(
 						"insert into `Burn`(UserId, RoundId, Submission) " .
-						"values ($burnedid, $roundId, '" . date(DATE_ATOM) . "');"
+						"values ($burnedid, $roundId, now());"
 						);
 				// TODO Inserted burn
 			} else {
 				mysql_query(
-						"update `Burn` set Submission = '" . date(DATE_ATOM) . "' " .
+						"update `Burn` set Submission = now() " .
 						"where UserId = $burnedid and RoundId = $roundId;"
 						);
 				// TODO New burn
