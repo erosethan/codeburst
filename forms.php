@@ -52,4 +52,22 @@
 	</form>
 <?php
 	}
+
+	function LoginForm() {
+?>
+	<form action="login.php" method="post">
+		<p>
+			<label for="username">Usuario:<br/></label>
+			<input type="text" name="username" id="username"/>
+		</p>
+		<!--<p>
+			<label for="password">Contraseña:</label>
+			<textarea name="password" id="password"></textarea>
+		</p>-->
+		<p>
+			<input type="submit" value="Iniciar sesión"/>
+		</p>
+	</form>
+<?php
+	}
 ?>
