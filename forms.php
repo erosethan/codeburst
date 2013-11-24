@@ -1,8 +1,9 @@
 <?php
-	function FileSubmit($FileType)
+	function FileSubmit($FileType, $RoundId)
 	{
 ?>
 	<form action="submit.php" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="roundid" value="<?php echo (int)$RoundId; ?>"/>
 <?php
 		if($FileType == 'code')
 		{

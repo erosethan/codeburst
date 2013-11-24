@@ -16,7 +16,7 @@
 
 	// Get info
 	$userId = (int)$_SESSION['UserId'];
-	$roundId = (int)1; // TODO Get from somewhere :P
+	$roundId = (int)$_POST['roundid'];
 
 	// Get round info
 	$result = mysql_query(
