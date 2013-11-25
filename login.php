@@ -10,8 +10,11 @@
 	}
 
 	// Start connection
-	// TODO Validate connection maybe
-	mysql_connect(DB_HOST, DB_USER, DB_PASS);
+	$connection = mysql_connect(DB_HOST, DB_USER, DB_PASS);
+	if (!$connection) {
+		die('Fatal error: ' . mysql_error());
+	}
+	
 	mysql_select_db(DB_NAME);
 
 	$result = mysql_query(
