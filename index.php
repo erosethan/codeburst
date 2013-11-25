@@ -54,23 +54,59 @@
 			mysql_free_result($result); 
 		}
 ?>
-
 <!DOCTYPE html>
 <html>
-        <head>
-			<meta charset = "utf-8"/>
-			<title>CodeBurst! Arena</title>
-        </head>
-        <body>
-                <script src = "jquery.js"></script>
-				<?php foreach($Matches as $match){ ?>
-					<div class = "round">
-						<div id = "roundname"><?php echo $match["RoundName"]; ?></div>
-						<div id = "username"><?php echo $match["UserName"]; ?></div>
-						<div id = "rivalname"><?php echo $match["RivalName"]; ?></div>
-						<div id = "startdate"><?php echo date("d/M/Y H:i:s", $match["CodingStart"]); ?></div>
-						<div id = "enter"><a href="arena.php?round=<?php echo $match["RoundId"];?>">Enter to the contest</a></div>
-					</div>
-				<?php } ?>
-        </body>
+<head>
+	<meta charset = "utf-8"/>
+	<title>CodeBurst! Arena</title>
+	<link rel="stylesheet" media="screen,projection" type="text/css" href="css/main.css" />
+	<!--[if lte IE 6]><link rel="stylesheet" type="text/css" href="css/main-msie.css" /><![endif]-->
+	<link rel="stylesheet" media="screen,projection" type="text/css" href="css/scheme.css" />
+	<link rel="stylesheet" media="print" type="text/css" href="css/print.css" />
+</head>
+<body>
+
+	<div id="main">
+		
+		<?php include("header.php"); ?>
+
+		<div id="cols" class="box">
+
+			<div id="content">			
+			
+				<h2 id="content-title">Rondas disponibles</h2>
+				<hr class="noscreen" />				
+				<div id="content-in">
+				
+					<table class="nomb table-style01">
+					<tr>
+						<th>Nombre de la ronda</th>
+						<th>Usuario</th>
+						<th>Rival</th>
+						<th>Fecha de inicio</th>
+						<th></th>
+					</tr>
+					<?php foreach($Matches as $match){ ?>
+					<tr>
+						<td id = "roundname"><?php echo $match["RoundName"]; ?></td>
+						<td id = "username"><?php echo $match["UserName"]; ?></td>
+						<td id = "rivalname"><?php echo $match["RivalName"]; ?></td>
+						<td id = "startdate"><?php echo date("d/M/Y H:i:s", $match["CodingStart"]); ?></td>
+						<td id = "enter"><a href="arena.php?round=<?php echo $match["RoundId"];?>">Entrar</a></td>
+					</tr>
+					<?php } ?>
+					</table>
+					
+
+				</div>
+				
+			</div>
+			<hr class="noscreen" />
+			<?php include("sidebar.php"); ?>		
+		</div>
+		<div id="cols-bottom"></div>
+		<hr class="noscreen" />		
+		<?php include("footer.php"); ?>
+	</div>
+	</body>
 </html>
