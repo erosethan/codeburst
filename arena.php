@@ -80,7 +80,7 @@
 					<script src = "jquery.js"></script>
 					<div id = "users"><h2><?php echo $UserName; ?> vs <?php echo $RivalName; ?></h2></div>
 					<div id = "stagename"><h3><?php echo $Stage['StageName']; ?></h3></div>
-					<div id = "stagemessage"><?php echo $Stage['StageMessage']; ?>: <?php echo date("H:i:s", $Stage['StageRemaining']); ?></div>
+					<div id = "stagemessage"><?php echo $Stage['StageMessage']; ?>: <?php echo date("H:i:s", $Stage['StageRemaining'] - (new DateTime())->getOffset()); ?></div>
 					<?php
 						include_once 'forms.php';
 						if($Stage['StageName'] == CODE_STAGE)
