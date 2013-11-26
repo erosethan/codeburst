@@ -53,41 +53,66 @@
 	// Get actual stage information.
 	$Stage = StageInfo($CodingStart, $BurningStart, $RoundEnd);
 ?>
-
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset = "utf-8"/>
-		<title>CodeBurst! Arena</title>
-	</head>
-	<body>
-		<script src = "jquery.js"></script>
-		<div id = "roundname"><?php echo $RoundName; ?></div>
-		<div id = "stagename"><?php echo $Stage['StageName']; ?></div>
-		<div id = "stagemessage"><?php echo $Stage['StageMessage']; ?></div>
-		<div id = "stageremaining"><?php echo $Stage['StageRemaining']; ?></div>
-		<div id = "username"><?php echo $UserName; ?></div>
-		<div id = "rivalname"><?php echo $RivalName; ?></div>
-		<?php
-			include_once 'forms.php';
-			if($Stage['StageName'] == CODE_STAGE)
-			{
-				FileSubmit('code');
+<head>
+	<meta charset = "utf-8"/>
+	<title>CodeBurst! Arena</title>
+	<link rel="stylesheet" media="screen,projection" type="text/css" href="css/main.css" />
+	<!--[if lte IE 6]><link rel="stylesheet" type="text/css" href="css/main-msie.css" /><![endif]-->
+	<link rel="stylesheet" media="screen,projection" type="text/css" href="css/scheme.css" />
+	<link rel="stylesheet" media="print" type="text/css" href="css/print.css" />
+</head>
+<body>
+
+	<div id="main">
+		
+		<?php include("header.php"); ?>
+
+		<div id="cols" class="box">
+
+			<div id="content">			
+			
+				<h2 id="content-title"><?php echo $RoundName; ?></h2>
+				<hr class="noscreen" />				
+				<div id="content-in">
 				
-				$query = "select * from Code where RoundId = $RoundId and UserId = $UserId";
-				$result = mysql_query($query);
-				if(mysql_num_rows($result) > 0)
-				{
-					$row = mysql_fetch_array($result);
-					mysql_free_result($result);
+					<script src = "jquery.js"></script>
+					<div id = "users"><h2><?php echo $UserName; ?> vs <?php echo $RivalName; ?></h2></div>
+					<div id = "stagename"><h3><?php echo $Stage['StageName']; ?></h3></div>
+					<div id = "stagemessage"><?php echo $Stage['StageMessage']; ?>: <?php echo date("H:i:s", $Stage['StageRemaining']); ?></div>
+					<?php
+						include_once 'forms.php';
+						if($Stage['StageName'] == CODE_STAGE)
+						{
+							FileSubmit('code', $RoundId);
+							
+							$query = "select * from Code where RoundId = $RoundId and UserId = $UserId";
+							$result = mysql_query($query);
+							if(mysql_num_rows($result) > 0)
+							{
+								$row = mysql_fetch_array($result);
+								mysql_free_result($result);
+								
+								echo '<p>Último enviado: ' . $row['Submission'];
+							}
+						}
+						if($Stage['StageName'] == BURN_STAGE)
+						{
+							FileSubmit('burn', $RoundId);
+						}
+					?>
 					
-					echo '<p>Último enviado: ' . $row['Submission'];
-				}
-			}
-			if($Stage['StageName'] == BURN_STAGE)
-			{
-				FileSubmit('burn');
-			}
-		?>
+
+				</div>
+				
+			</div>
+			<hr class="noscreen" />
+			<?php include("sidebar.php"); ?>		
+		</div>
+		<div id="cols-bottom"></div>
+		<hr class="noscreen" />		
+		<?php include("footer.php"); ?>
+	</div>
 	</body>
 </html>
