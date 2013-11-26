@@ -22,6 +22,7 @@
 			<address>
 				<strong>CodeBurst! 2013</strong><br />
 				By Club de Algoritmia ESCOM<br />
+				<img src="design/logo_huron.png" width="150px"/>
 			</address>
 		</div>
 	</div>
