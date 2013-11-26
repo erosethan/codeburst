@@ -9,7 +9,7 @@
 
 			<dl id="news">
 				<dt><a href="https://db.tt/dXzlLSXF">Reglas</a></dt>
-				<dd><span class="date">11/24/13</span>Reglamento de la competencia.</dd>
+				<dd><span class="date">11/24/13</span> Reglamento de la competencia.</dd>
 			</dl>
 		
 		</div> <!-- /aside-box -->
