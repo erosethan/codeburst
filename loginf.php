@@ -15,7 +15,7 @@
 		<title>CodeBurst! Login</title>
 	</head>
 	<body>
-		<script src = "jquery.js"></script>
+		<script src = "js/jquery.js"></script>
 		<?php LoginForm(); ?>
 	</body>
 </html>

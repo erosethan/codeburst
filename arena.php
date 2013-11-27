@@ -60,13 +60,15 @@
 <head>
 	<meta charset = "utf-8"/>
 	<title>CodeBurst! Arena</title>
+	
+	<script src = "js/jquery.js"></script>
+	
 	<link rel="stylesheet" media="screen,projection" type="text/css" href="css/main.css" />
 	<!--[if lte IE 6]><link rel="stylesheet" type="text/css" href="css/main-msie.css" /><![endif]-->
 	<link rel="stylesheet" media="screen,projection" type="text/css" href="css/scheme.css" />
 	<link rel="stylesheet" media="print" type="text/css" href="css/print.css" />
 </head>
 <body>
-
 	<div id="main">
 		
 		<?php include("header.php"); ?>
@@ -78,8 +80,6 @@
 				<h2 id="content-title"><?php echo $RoundName; ?></h2>
 				<hr class="noscreen" />				
 				<div id="content-in">
-				
-					<script src = "jquery.js"></script>
 					<div id = "users"><h2><?php echo $UserName; ?> vs <?php echo $RivalName; ?></h2></div>
 					<div id = "stagename"><h3><?php echo $Stage['StageName']; ?></h3></div>
 					<div id = "stagemessage"><?php echo $Stage['StageMessage']; ?>: <?php echo date("H:i:s", $Stage['StageRemaining'] - $CurrentDate->getOffset()); ?></div>
@@ -97,6 +97,7 @@
 								mysql_free_result($result);
 								
 								echo '<p>Último enviado: ' . $row['Submission'];
+								FileDisplay(1, 1, $row['CodeLang']);
 							}
 						}
 						if($Stage['StageName'] == BURN_STAGE)

@@ -70,4 +70,35 @@
 	</form>
 <?php
 	}
+	
+	function FileDisplay($RoundId, $UserId, $FileType) {
+		include_once 'filert.php';
+		
+		if($FileType == 'burn') {
+			$file = getBurnDirName($RoundId). '/';
+			$file .= getBurnFileName($RoundId, $UserId);
+			$FileType = 'text';
+		}
+		else {
+			$file = getCodeDirName($RoundId). '/';
+			$file .= getCodeFileName($RoundId, $UserId, $FileType);
+		}
+?>
+	<script type="text/javascript" src="js/shCore.js"></script>
+
+	<script type="text/javascript" src="js/shBrushCpp.js"></script>
+	<script type="text/javascript" src="js/shBrushJava.js"></script>
+	<script type="text/javascript" src="js/shBrushPlain.js"></script>
+	<script type="text/javascript" src="js/shBrushPython.js"></script>
+	 
+	<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+	<link href="css/shThemeDefault.css" rel="stylesheet" type="text/css" />
+	 
+	<pre class="brush: <?php echo $FileType; ?>"><?php echo htmlspecialchars(file_get_contents($file)); ?></pre>
+	
+	<script type="text/javascript">
+		 SyntaxHighlighter.all();
+	</script>
+<?php
+	}
 ?>
