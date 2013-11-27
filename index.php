@@ -7,7 +7,7 @@
         // Redirect if not logged in
         if(!isset($_SESSION['UserId']))
         {
-                header('Location: login.php');
+                header('Location: loginf.php');
                 die();
         }
         
