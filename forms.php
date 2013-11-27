@@ -70,7 +70,7 @@
 			<input type="text" name="username" id="username"/>
 		</p>
 		<p>
-			<label for="password">Contraseña:</label>
+			<label for="password">Contraseña:<br/></label>
 			<input type="password" name="password" id="password"/>
 		</p>
 		<p>
