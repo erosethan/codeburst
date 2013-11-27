@@ -56,14 +56,23 @@
 	function LoginForm() {
 ?>
 	<form action="login.php" method="post">
+<?php
+		if (isset($_GET['err'])) {
+?>
+		<p>
+			<strong>Nombre de usuario o contraseña incorrectos.</strong>
+		</p>
+<?php
+		}
+?>
 		<p>
 			<label for="username">Usuario:<br/></label>
 			<input type="text" name="username" id="username"/>
 		</p>
-		<!--<p>
+		<p>
 			<label for="password">Contraseña:</label>
-			<textarea name="password" id="password"></textarea>
-		</p>-->
+			<input type="password" name="password" id="password"/>
+		</p>
 		<p>
 			<input type="submit" value="Iniciar sesión"/>
 		</p>

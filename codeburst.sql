@@ -6,6 +6,7 @@ drop table if exists `User`;
 create table `User`(
 	UserId int(10) not null auto_increment,
 	UserName varchar(50) not null,
+	UserPass varchar(20) not null,
 	primary key(UserId)
 );
 

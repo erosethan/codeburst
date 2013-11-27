@@ -19,11 +19,12 @@
 
 	$result = mysql_query(
 			"select UserId, UserName from `User` where " .
-			"ucase(UserName) = ucase('" . mysql_real_escape_string($_POST['username']) . "');"
+			"ucase(UserName) = ucase('" . mysql_real_escape_string($_POST['username']) . "') and " .
+			"UserPass = '" . mysql_real_escape_string($_POST['password']) . "';"
 			);
-	// Incorrect user
+	// Incorrect user and password
 	if (mysql_num_rows($result) == 0) {
-		header('Location: loginf.php'); // TODO Send error
+		header('Location: loginf.php?err');
 		die();
 	}
 	$userInfo = mysql_fetch_array($result);
