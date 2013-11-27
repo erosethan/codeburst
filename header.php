@@ -1,5 +1,5 @@
 <div id="header">
-	<h1 id="logo"><a href="index.php">Codeburst!</h1>
+	<h1 id="logo"><a href="index.php">CodeBurst!</h1>
 	<hr class="noscreen" />        
 
 	<div id="slogan"></div>

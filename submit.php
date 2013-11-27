@@ -144,4 +144,5 @@
 		move_uploaded_file($_FILES['file']['tmp_name'], $route);
 	else
 		file_put_contents($route, $_POST['dinput']);
+	header("Location: arena.php?round=$roundId");
 ?>
