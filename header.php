@@ -1,7 +1,5 @@
 <div id="header">
-	<h1 id="logo"><a href="index.php">CodeBurst!</h1>
-	<hr class="noscreen" />        
-
+	<hr class="noscreen" />
 	<div id="slogan"></div>
 	<hr class="noscreen" />        
 </div> 
