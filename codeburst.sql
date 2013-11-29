@@ -48,38 +48,38 @@ create table `Burn`(
 	primary key(UserId, RoundId)
 );
 
-drop view if exists matchsalldata;
-create view matchsalldata AS
-select M.*, CR.Submission as RedUserSubmission, CB.Submission as BlueUserSubmission, UR.UserName as RedUserName, UB.UserName as BlueUserName 
-from `match` as M
-left outer join code as CR ON CR.UserId = M.RedUserId 
-left outer join code as CB ON CB.UserId = M.BlueUserId
-inner join user as UR on UR.UserId = RedUserId
-inner join user as UB on UB.UserId = BlueUserId
+drop view if exists `matchsalldata`;
+create view `matchsalldata` AS
+select M.*, CR.Submission as RedUserSubmission, CB.Submission as BlueUserSubmission, UR.UserName as RedUserName, UB.UserName as BlueUserName
+from `Match` as M
+left outer join `Code` as CR ON CR.UserId = M.RedUserId
+left outer join `Code` as CB ON CB.UserId = M.BlueUserId
+inner join `User` as UR on UR.UserId = RedUserId
+inner join `User` as UB on UB.UserId = BlueUserId;
 
-drop view if exists matchsalldatawinners;
-create view matchsalldatawinners as
+drop view if exists `matchsalldatawinners`;
+create view `matchsalldatawinners` as
 select *, if(RedUserSubmission IS NULL, "Blue", if(BlueUserScore = RedUserScore, if(BlueUserSubmission < RedUserSubmission, "Blue", "Red"), if(BlueUserScore > RedUserScore, "Blue", "Red"))) as Winner
-from matchsalldata
+from `matchsalldata`;
 
-drop view if exists codingstagescore;
-create view codingstagescore as
+drop view if exists `codingstagescore`;
+create view `codingstagescore` as
 (select R.RoundId, MR.RedUserName as UserName, TIMESTAMPDIFF(MINUTE, R.CodingStart, MR.RedUserSubmission) as Submission
-from matchsalldata as MR
-inner join round as R on MR.RoundId = R.RoundId)
+from `matchsalldata` as MR
+inner join `Round` as R on MR.RoundId = R.RoundId)
 union
-(select R.RoundId, MB.BlueUserName as UserName,  TIMESTAMPDIFF(MINUTE, R.CodingStart, MB.BlueUserSubmission) as Submission 
-from matchsalldata as MB
-inner join round as R on MB.RoundId = R.RoundId)
-order by Submission
+(select R.RoundId, MB.BlueUserName as UserName, TIMESTAMPDIFF(MINUTE, R.CodingStart, MB.BlueUserSubmission) as Submission
+from `matchsalldata` as MB
+inner join `Round` as R on MB.RoundId = R.RoundId)
+order by Submission;
 
-drop view if exists finalscore;
-create view finalscore as
-(select R.RoundId, MR.RedUserName as UserName, MR.RedUserScore as Score, TIMESTAMPDIFF(MINUTE, R.CodingStart, MR.RedUserSubmission) as Submission, MR.Winner = "Red" as Winner 
-from matchsalldatawinners as MR
-inner join round as R on MR.RoundId = R.RoundId)
+drop view if exists `finalscore`;
+create view `finalscore` as
+(select R.RoundId, MR.RedUserName as UserName, MR.RedUserScore as Score, TIMESTAMPDIFF(MINUTE, R.CodingStart, MR.RedUserSubmission) as Submission, MR.Winner = "Red" as Winner
+from `matchsalldatawinners` as MR
+inner join `Round` as R on MR.RoundId = R.RoundId)
 union
-(select R.RoundId, MB.BlueUserName as UserName, MB.BlueUserScore as Score, TIMESTAMPDIFF(MINUTE, R.CodingStart, MB.BlueUserSubmission) as Submission, MB.Winner = "Blue" as Winner 
-from matchsalldatawinners as MB
-inner join round as R on MB.RoundId = R.RoundId)
-order by Score DESC, Submission ASC
+(select R.RoundId, MB.BlueUserName as UserName, MB.BlueUserScore as Score, TIMESTAMPDIFF(MINUTE, R.CodingStart, MB.BlueUserSubmission) as Submission, MB.Winner = "Blue" as Winner
+from `matchsalldatawinners` as MB
+inner join `Round` as R on MB.RoundId = R.RoundId)
+order by Score DESC, Submission ASC;
