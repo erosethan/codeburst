@@ -81,7 +81,7 @@
 						include_once 'forms.php';
 						if($Stage['StageName'] == WAIT_STAGE)
 						{
-							echo '<h3>Esta ronda aun no comienza :)</h3>';
+							echo '<h3>Esta ronda aún no comienza :)</h3>';
 						}
 						else
 						{
@@ -92,8 +92,8 @@
 								while($row = mysql_fetch_array($result))
 								{
 									if ($row["UserId"] == $RivalId ) $CodeName = $RivalName; else $CodeName = $UserName;
-									echo '<hr/><h3>Codigo enviado por '.$CodeName.'</h3>';
-									FileDisplay($RoundId, $UserId, $row['CodeLang']);
+									echo '<hr/><h3>Código enviado por '.$CodeName.'</h3>';
+									FileDisplay($RoundId, $row['UserId'], $row['CodeLang']);
 									echo '<p>Enviado: ' . $row['Submission'];
 								}
 							}
@@ -107,7 +107,7 @@
 								while($row = mysql_fetch_array($result))
 								{
 									if ($row["UserId"] == $RivalId ) $BurnName = $RivalName; else $BurnName = $UserName;
-									echo '<hr/><h3>Burn para el codigo de '.$BurnName.'</h3>';
+									echo '<hr/><h3>Burn para el código de '.$BurnName.'</h3>';
 									FileDisplay($RoundId, $row["UserId"], 'burn');
 									echo '<p>Enviado: ' . $row['Submission'];
 								}

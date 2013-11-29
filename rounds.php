@@ -7,8 +7,8 @@
         // Redirect if not logged in
         if(!isset($_SESSION['UserId']))
         {
-                header('Location: loginf.php');
-                die();
+            header('Location: loginf.php');
+            die();
         }
 		
 		// Redirect if user is not root.
