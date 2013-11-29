@@ -7,16 +7,23 @@
         // Redirect if not logged in
         if(!isset($_SESSION['UserId']))
         {
-                header('Location: loginf.php');
-                die();
+            header('Location: loginf.php');
+            die();
         }
+		
+		// Redirect if user is not root.
+		if($_SESSION['UserId'] != 0)
+		{
+			header('Location: index.php');
+			die();
+		}
         
         $UserId = $_SESSION['UserId'];
 
         mysql_connect(DB_HOST, DB_USER, DB_PASS);
         mysql_select_db(DB_NAME);
         
-        $query = "select RoundId, RoundName, RoundBase, CodingStart, BurningStart, RoundEnd, RedUserId, Red.UserName as RedName, Blue.UserName as BlueName from `Match` natural join `Round` join User as Red join User as Blue on Red.UserId = RedUserId and Blue.UserId = BlueUserId where (RedUserId = $UserId or BlueUserId = $UserId)";
+        $query = "select RoundId, RoundName, RoundBase, CodingStart, BurningStart, RoundEnd, RedUserId, Red.UserName as RedName, Blue.UserName as BlueName from `Match` natural join `Round` join User as Red join User as Blue on Red.UserId = RedUserId and Blue.UserId = BlueUserId order by CodingStart desc";
         $result = mysql_query($query);
         $noMatchFound = false;
         // Check if there is any match for this user
@@ -81,19 +88,19 @@
 					<table class="nomb table-style01">
 					<tr>
 						<th>Nombre de la ronda</th>
-						<th>Usuario</th>
-						<th>Rival</th>
+						<th>Usuario 1</th>
+						<th>Usuario 2</th>
 						<th>Fecha de inicio</th>
 						<th></th>
 					</tr>
 					
 					<?php if ($noMatchFound == false ) foreach($Matches as $match){ ?>
-					<tr>
+					<tr style='background-color:<?php if ($match["RoundEnd"] < time() ) echo "red"; else echo "#7fff00";?>'>
 						<td id = "roundname"><?php echo $match["RoundName"]; ?></td>
 						<td id = "username"><?php echo $match["UserName"]; ?></td>
 						<td id = "rivalname"><?php echo $match["RivalName"]; ?></td>
 						<td id = "startdate"><?php echo date("d/M/Y H:i:s", $match["CodingStart"]); ?></td>
-						<td id = "enter"><a href="arena.php?round=<?php echo $match["RoundId"];?>">Entrar</a></td>
+						<td id = "enter"><a href="monitor.php?round=<?php echo $match["RoundId"];?>">Entrar</a></td>
 					</tr>
 					<?php } ?>
 					</table>
