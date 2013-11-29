@@ -18,7 +18,7 @@
         
         $query = "select RoundId, RoundName, RoundBase, CodingStart, BurningStart, RoundEnd, RedUserId, Red.UserName as RedName, Blue.UserName as BlueName from `Match` natural join `Round` join User as Red join User as Blue on Red.UserId = RedUserId and Blue.UserId = BlueUserId where (RedUserId = $UserId or BlueUserId = $UserId)";
         $result = mysql_query($query);
-        
+        $noMatchFound = false;
         // Check if there is any match for this user
         if(mysql_num_rows($result) == 0)
         {
@@ -86,7 +86,8 @@
 						<th>Fecha de inicio</th>
 						<th></th>
 					</tr>
-					<?php foreach($Matches as $match){ ?>
+					
+					<?php if ($noMatchFound == false ) foreach($Matches as $match){ ?>
 					<tr>
 						<td id = "roundname"><?php echo $match["RoundName"]; ?></td>
 						<td id = "username"><?php echo $match["UserName"]; ?></td>
