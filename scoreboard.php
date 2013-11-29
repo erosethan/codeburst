@@ -23,7 +23,7 @@
         mysql_connect(DB_HOST, DB_USER, DB_PASS);
         mysql_select_db(DB_NAME);
         
-        $query = "select * from round where RoundId = $RoundId";
+        $query = "select * from `Round` where RoundId = $RoundId";
 		$result = mysql_query($query);
         // Check if there is any match for this user
         if(mysql_num_rows($result) == 0)
@@ -95,7 +95,7 @@
 								<th>Resultado</th>
 							</tr>
 					<?php
-							$query = "select * from codingstagescore where RoundId = $RoundId and Submission Is NOT NULL order by Submission ";
+							$query = "select * from `codingstagescore` where RoundId = $RoundId and Submission Is NOT NULL order by Submission ";
 							$result = mysql_query($query);
 							
 							while ($row = mysql_fetch_array($result)) {
@@ -108,7 +108,7 @@
 					<?php
 								$place++;
 							}
-							$query = "select * from codingstagescore where RoundId = $RoundId and Submission Is NULL ";
+							$query = "select * from `codingstagescore` where RoundId = $RoundId and Submission Is NULL ";
 							$result = mysql_query($query);
 							
 							while ($row = mysql_fetch_array($result)) {
@@ -137,7 +137,7 @@
 								<th>Resultado</th>
 							</tr>
 					<?php
-							$query = "select * from finalscore where RoundId = $RoundId and Submission Is NOT NULL order by Score DESC, Submission ASC";
+							$query = "select * from `finalscore` where RoundId = $RoundId and Submission Is NOT NULL order by Score DESC, Submission ASC";
 							$result = mysql_query($query);
 							
 							while ($row = mysql_fetch_array($result)) {
@@ -152,7 +152,7 @@
 					<?php
 								$place++;
 							}
-							$query = "select * from finalscore where RoundId = $RoundId and Submission Is NULL order by Score DESC, Submission ASC";
+							$query = "select * from `finalscore` where RoundId = $RoundId and Submission Is NULL order by Score DESC, Submission ASC";
 							$result = mysql_query($query);
 							
 							while ($row = mysql_fetch_array($result)) {
