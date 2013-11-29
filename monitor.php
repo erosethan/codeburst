@@ -76,7 +76,7 @@
 				<div id="content-in">
 					<div id = "users" style = "text-align: center;"><h1><?php echo $UserName; ?> vs <?php echo $RivalName; ?></h1></div><hr/>
 					<div id = "stagename" style = "text-align: right;"><h2>Etapa: <?php echo $Stage['StageName']; ?></h2></div>
-					<div id = "stagemessage" style = "text-align: right;"><?php echo $Stage['StageMessage']; ?>: <?php echo date("H:i:s", $Stage['StageRemaining'] - $CurrentDate->getOffset()); ?></div><br/><hr/>
+					<div id = "stagemessage" style = "text-align: right;"><?php echo $Stage['StageMessage']; ?>: <?php echo date("H:i:s", $Stage['StageRemaining'] - $CurrentDate->getOffset()); ?></div><br/>
 					<?php
 						include_once 'forms.php';
 						if($Stage['StageName'] == WAIT_STAGE)
