@@ -26,6 +26,8 @@ create table `Match`(
 	RoundId int(10) not null,
 	RedUserId int(10) not null,
 	BlueUserId int(10) not null,
+	`RedUserScore` tinyint(4) NOT NULL DEFAULT '0',
+	`BlueUserScore` tinyint(4) NOT NULL DEFAULT '0',
 	primary key(RoundId, RedUserId)
 );
 
@@ -45,3 +47,7 @@ create table `Burn`(
 	Submission datetime not null,
 	primary key(UserId, RoundId)
 );
+
+DROP VIEW IF EXISTS `matchsinroundscoringdata`; 
+CREATE VIEW `matchsinroundscoringdata` AS select `m`.`RoundId` AS `RoundId`,`m`.`RedUserId` AS `RedUserId`,`m`.`BlueUserId` AS `BlueUserId`,`m`.`RedUserScore` AS `RedUserScore`,`m`.`BlueUserScore` AS `BlueUserScore`,`cr`.`Submission` AS `RedUserSubmission`,`cb`.`Submission` AS `BlueUserSubmission` from ((`match` `m` join `code` `cr` on((`m`.`RedUserId` = `cr`.`UserId`))) join `code` `cb` on((`m`.`BlueUserId` = `cb`.`UserId`)));
+
