@@ -149,6 +149,7 @@
 							echo '<h3>La ronda ha finalizado, ¡espera los resultados! D:</h3>';
 						}
 					?>
+					<div style = "text-align: right;"> <a href="scoreboard.php?round=<?php echo $RoundId; ?>"> Scoreboard </a></div><br/>
 				</div>
 			</div>
 			<hr class="noscreen" />
